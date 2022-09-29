@@ -298,7 +298,7 @@ https://docs.microsoft.com/en-us/azure/automation/how-to/region-mappings
             $Comments= $msgTable.noSecurityContactInfo -f $sub.Name
             $MitigationCommands += $msgTable.setSecurityContact -f $sub.Name
         }
-        if ((Get-AzSecurityPricing | Select-Object PricingTier | Where-Object {$_.PricingTier -eq 'Free'}).Count -gt 0)
+        if ((Get-AzSecurityPricing | Where-Object {$_.PricingTier -eq 'Free' -and $_.Name -ne "CloudPosture"}).Count -gt 0)
         {
             $IsCompliant=$false
             $Comments += $msgTable.notAllDfCStandard -f $sub.Name
